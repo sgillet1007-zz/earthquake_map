@@ -1,0 +1,21 @@
+body {
+  text: 0;
+  padding: 0;
+  font-family: arial, sans-serif;
+}
+
+.leaflet-container {
+  height: 45vh;
+  width: 100%;
+}
+
+#quake-list-container {
+  border-top: 5px solid #222;
+  height:45vh;
+  width: 100%;
+  margin: auto;
+  overflow-y: scroll;
+  text-align: center;
+  color: #222;
+  background-color: #ddd;
+}
