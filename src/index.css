@@ -5,13 +5,13 @@ body {
 }
 
 .leaflet-container {
-  height: 45vh;
+  height: 60vh;
   width: 100%;
 }
 
 #quake-list-container {
   border-top: 5px solid #222;
-  height:45vh;
+  height:30vh;
   width: 100%;
   margin: auto;
   overflow-y: scroll;
