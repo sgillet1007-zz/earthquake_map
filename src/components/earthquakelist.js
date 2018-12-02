@@ -3,7 +3,7 @@ import moment from 'moment'
 
 class EarthquakeList extends Component {
   render() {
-    const quakeListItems = this.props.quakes.map(quake => {
+    const quakeListItems = this.props.renderedEarthquakes.sort((a,b) => b.time - a.time).map(quake => {
         return (
           <div key={quake.id}>
               <h3>{`${moment(quake.time).format('LLL')} @ ${quake.place}`}</h3>

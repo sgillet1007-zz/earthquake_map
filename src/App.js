@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      earthquakes: []
+      earthquakes: [],
+      renderedEarthquakes: []
     }
   }
 
@@ -26,19 +27,39 @@ class App extends Component {
 			long: f.geometry.coordinates[0],
 			depth: f.geometry.coordinates[2],
 			url: f.properties.url
-		}})})
+    }}).sort((a, b) => a.time - b.time)
+    })
     )
+
+    this.timerID = setInterval(
+			() => this.tick(),
+			900
+		);
+
   }
 
+	componentWillUnmount(){
+		clearInterval(this.timerID);
+  }
+  
+  tick =() => {
+		let currentIndex = this.state.renderedEarthquakes.length;
+		if(this.state.renderedEarthquakes.length < this.state.earthquakes.length){
+			const nextQuake = this.state.earthquakes[currentIndex];
+			this.setState({ 
+				renderedEarthquakes: this.state.renderedEarthquakes.concat(nextQuake)
+			})
+		}
+	}
+
   render() {
-    const earthquakes = this.state.earthquakes
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Earthquakes (Past 24 hours)</h1>
         </header>
-        <WorldMap earthquakes={earthquakes} />
-        <EarthquakeList quakes={earthquakes} />
+        <WorldMap renderedEarthquakes={this.state.renderedEarthquakes} />
+        <EarthquakeList renderedEarthquakes={this.state.renderedEarthquakes} />
       </div>
     );
   }
