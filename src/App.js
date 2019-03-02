@@ -50,15 +50,23 @@ class App extends Component {
 				renderedEarthquakes: this.state.renderedEarthquakes.concat(nextQuake)
 			})
 		}
-	}
+  }
 
   render() {
+    const worldMapData = {
+      basemap : 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png',
+      attribution : '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      mapCenter : [37, -30],
+      zoomLevel : 2,
+      renderedEarthquakes: this.state.renderedEarthquakes
+    }
+
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Earthquakes (Past 24 hours)</h1>
         </header>
-        <WorldMap renderedEarthquakes={this.state.renderedEarthquakes} />
+        <WorldMap data={worldMapData} />
         <EarthquakeList renderedEarthquakes={this.state.renderedEarthquakes} />
       </div>
     );
